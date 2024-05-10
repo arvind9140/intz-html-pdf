@@ -67,11 +67,12 @@ const createPdfFromUrl = async () => {
     
   };
 
-  const url = 'https://example.com'; // URL to generate the PDF from
+ let file = { url:"https://www.corifeus.com/html-pdf"}
+
   const savePath = path.join(__dirname, 'output.pdf'); // Path to save the generated PDF
 
   try {
-    await generatePdfFromUrl(url, pdfOptions, savePath); 
+    await generatePdfFromUrl(file, pdfOptions, savePath); 
     console.log('PDF generated and saved to', savePath);
   } catch (error) {
     console.error('Error generating PDF from URL:', error);
