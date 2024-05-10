@@ -1,6 +1,6 @@
 {
   "name": "intz-html-pdf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This html to pdf convert npm package",
   "main": "index.js",
   
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/arvind9140/intz-html-pdf.git"
   },
   "keywords": [
-    "html-pdf"
+    "pdf puppeteer html2pdf html-PDF htmltopdf html-pdf node-html-pdf html-pdf-node puppeteer-html-pdf puppeteer-pdf pdf-puppeteer puppeteer-node.js puppeteer-node node-puppeteer handlebars"
   ],
   "author": "Arvind Maurya",
   "license": "MIT",
