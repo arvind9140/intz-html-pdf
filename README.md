@@ -9,13 +9,13 @@ To install the package, use npm or yarn:
 ```bash
 # Using npm
 npm install intz-html-pdf
-
+```
+```
 # Using yarn
 yarn add intz-html-pdf
+```
 
-
-
-Usage
+## Usage
 
 
 This package provides two primary functions for generating PDFs: `generatePdf` and `generatePdfs`.
@@ -23,6 +23,8 @@ generatePdf
 The `generatePdf` function creates a single PDF from given HTML content or a URL. It supports inline CSS and templating with Handlebars. Here's an example of how to use it to generate a PDF from a basic HTML string:
 
 The generatePdf function takes a single HTML string
+
+```
 const { generatePdf } = require('intz-html-pdf'); 
 const path = require('path');
 
@@ -47,14 +49,14 @@ const createSinglePdf = async () => {
 };
 
 createSinglePdf();
-
+```
 
 This package provides a function to generate a PDF from a given URL. The generated PDF can be saved to a specified path or returned as a buffer for further processing.
 
 
-Generating a PDF from a URL
+## Generating a PDF from a URL
 Here's an example of how to generate a PDF from a URL and save it to a specified path:
-
+```
 const { generatePdfFromUrl } = require('intz-html-pdf'); 
 const path = require('path');
 
@@ -77,13 +79,13 @@ const createPdfFromUrl = async () => {
 };
 
 createPdfFromUrl(); 
+```
 
 
-
-generatePdfs
+## generatePdfs
 The generatePdfs function creates multiple PDFs from an array of files, each containing either HTML content or a URL to a web page. The PDFs are saved to a specified directory. Here's an example:
 
-
+```
 const { generatePdfs } = require('intz-html-pdf'); 
 const path = require('path');
 
@@ -115,16 +117,18 @@ const createMultiplePdfs = async () => {
   }
 };
 
-createMultiplePdfs(); 
+createMultiplePdfs();
+
+```
 
 In this example, multiple PDFs are generated and saved to a specific directory.
 
 
 This package offers a function to generate multiple PDFs from an array of URLs. The generated PDFs can be saved to a specified directory for easy retrieval. Here's an example of how to generate multiple PDFs from multiple URLs:
 
-Generate Multiple PDFs
+## Generate Multiple PDFs
 
-
+```
 const { generatePdfsFromUrls } = require('intz-html-pdf'); 
 const path = require('path');
 
@@ -156,12 +160,12 @@ const createMultiplePdfsFromUrls = async () => {
 };
 
 createMultiplePdfsFromUrls(); 
-
+```
 
 This package provides functions to generate PDFs with custom CSS. You can use inline CSS, external stylesheets, or a combination of both. Here's an example of how to generate a PDF with custom or external CSS:
 
-Generate PDF with Inline CSS
-
+## Generate PDF with Inline CSS
+```
 const pdf = require("intz-html-pdf")
 const fs = require("fs").promises
 
@@ -238,9 +242,9 @@ const pdfGenerate = async (req, res) => {
 
 }
 pdfGenerate()
+```
 
-
-Notes and Recommendations
+## Notes and Recommendations
 
 Handling Errors: Always wrap your code in try-catch blocks to handle errors gracefully.
 Puppeteer Options: You can customize Puppeteer launch options with additional arguments.
@@ -248,7 +252,7 @@ PDF Options: Adjust the pdfOptions to customize the format, orientation, and oth
 File Paths: Use the path module to ensure correct file paths for different operating systems.
 
 
-Contributing
+## Contributing
 
 If you'd like to contribute to this package, please submit a pull request or open an issue on GitHub. Contributions and feedback are welcome.
 
