@@ -1,0 +1,92 @@
+/* Resetting default styles for consistent appearance */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+/* Container class for consistent padding and width */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  
+}
+
+/* Header styling */
+header {
+    background-color: #b91313;
+    /* Dark background color */
+    color: white;
+    padding: 10px 0;
+}
+
+header .logo img {
+    height: 50px;
+    /* Adjust logo height */
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    /* Align navigation to the right */
+}
+
+nav ul {
+    list-style: none;
+    /* Remove default list style */
+}
+
+nav ul li {
+    display: inline;
+    /* Inline list items */
+    margin-right: 20px;
+    /* Space between items */
+}
+
+nav ul li a {
+    text-decoration: none;
+    /* Remove underline */
+    color: white;
+    /* White text color */
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+/* Main content styling */
+main {
+    padding: 20px 0;
+    /* Vertical padding */
+}
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    /* Dark background color */
+    color: white;
+    padding: 20px 0;
+    /* Vertical padding */
+    text-align: center;
+    /* Center-align text */
+}
+
+footer p {
+    margin-bottom: 10px;
+    /* Space between paragraphs */
+}
+
+footer a {
+    text-decoration: none;
+    /* Remove underline */
+    color: white;
+    /* White text color */
+}
+
+footer a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
