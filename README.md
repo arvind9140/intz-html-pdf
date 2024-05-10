@@ -25,7 +25,7 @@ The `generatePdf` function creates a single PDF from given HTML content or a URL
 The generatePdf function takes a single HTML string
 
 ```
-const { generatePdf } = require('intz-html-pdf'); 
+const pdf = require('intz-html-pdf'); 
 const path = require('path');
 
 // Function to generate a single PDF
@@ -41,7 +41,7 @@ const createSinglePdf = async () => {
   const savePath = path.join(__dirname, 'output.pdf'); 
 
   try {
-    await generatePdf(file, pdfOptions, savePath);
+    await pdf.generatePdf(file, pdfOptions, savePath);
     console.log('PDF generated and saved to', savePath);
   } catch (error) {
     console.error('Error generating PDF:', error);
@@ -57,7 +57,7 @@ This package provides a function to generate a PDF from a given URL. The generat
 ## Generating a PDF from a URL
 Here's an example of how to generate a PDF from a URL and save it to a specified path:
 ```
-const { generatePdfFromUrl } = require('intz-html-pdf'); 
+const pdf = require('intz-html-pdf'); 
 const path = require('path');
 
 // Function to generate a PDF from a URL
@@ -72,7 +72,7 @@ const createPdfFromUrl = async () => {
   const savePath = path.join(__dirname, 'output.pdf'); // Path to save the generated PDF
 
   try {
-    await generatePdfFromUrl(file, pdfOptions, savePath); 
+    await pdf.generatePdf(file, pdfOptions, savePath); 
     console.log('PDF generated and saved to', savePath);
   } catch (error) {
     console.error('Error generating PDF from URL:', error);
@@ -87,7 +87,7 @@ createPdfFromUrl();
 The generatePdfs function creates multiple PDFs from an array of files, each containing either HTML content or a URL to a web page. The PDFs are saved to a specified directory. Here's an example:
 
 ```
-const { generatePdfs } = require('intz-html-pdf'); 
+const pdf = require('intz-html-pdf'); 
 const path = require('path');
 
 // Function to generate multiple PDFs
@@ -110,7 +110,7 @@ const createMultiplePdfs = async () => {
   ];
 
   try {
-    const pdfs = await generatePdfs(files, pdfOptions, saveDirectory);
+    const pdfs = await pdf.generatePdfs(files, pdfOptions, saveDirectory);
 
     console.log('PDFs generated and saved to:', pdfs.map(pdf => pdf.savedPath));
   } catch (error) {
@@ -130,7 +130,7 @@ This package offers a function to generate multiple PDFs from an array of URLs. 
 ## Generate Multiple PDFs
 
 ```
-const { generatePdfsFromUrls } = require('intz-html-pdf'); 
+const pdf = require('intz-html-pdf'); 
 const path = require('path');
 
 // Function to generate multiple PDFs from multiple URLs
@@ -149,7 +149,7 @@ const createMultiplePdfsFromUrls = async () => {
   ];
 
   try {
-    const pdfs = await generatePdfsFromUrls(urls, pdfOptions, saveDirectory);
+    const pdfs = await pdf.generatePdfs(urls, pdfOptions, saveDirectory);
 
     pdfs.forEach(pdf => {
       console.log(`PDF saved to: ${pdf.savedPath}`); 
