@@ -67,7 +67,7 @@ const createPdfFromUrl = async () => {
     
   };
 
- let file = { url:"https://www.corifeus.com/html-pdf"}
+ let file = { url:"https://example.com"}
 
   const savePath = path.join(__dirname, 'output.pdf'); // Path to save the generated PDF
 
