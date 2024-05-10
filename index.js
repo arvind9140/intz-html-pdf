@@ -2,6 +2,8 @@ const puppeteer = require("puppeteer");
 var Promise = require("bluebird");
 const hb = require("handlebars");
 const inlineCss = require("inline-css");
+const path = require("path")
+const fs  = require("fs")
 
 async function generatePdf(file, pdfOptions,pdfpath, callback) {
     const args = ["--no-sandbox", "--disable-setuid-sandbox" ,'--headless', '--disable-gpu'];
@@ -20,8 +22,8 @@ async function generatePdf(file, pdfOptions,pdfpath, callback) {
             const template = hb.compile(content, { strict: true });
             const html = template({}); 
             await page.setContent(html, { waitUntil: "networkidle0" });
-            const bodyStyle = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-            console.log("Body background color:", bodyStyle)
+            await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+           
 
         } else {
             await page.goto(file.url, {
@@ -48,48 +50,55 @@ async function generatePdf(file, pdfOptions,pdfpath, callback) {
         throw error;
     }
 }
-async function generatePdfs(files, options, callback) {
-    // we are using headless mode
-    let args = ["--no-sandbox", "--disable-setuid-sandbox",'--disable-gpu'];
-    if (options.args) {
-        args = options.args;
-        delete options.args;
-    }
+const generatePdfs = async (files, options, saveDirectory) => {
     const browser = await puppeteer.launch({
-        args: args,
+        args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-gpu"],
     });
-    let pdfs = [];
+
+    const pdfs = [];
     const page = await browser.newPage();
-    for (let file of files) {
-        if (file.content) {
-            data = await inlineCss(file.content, { url: "/" });
-            console.log("Compiling the template with handlebars");
-            // we have compile our code with handlebars
-            const template = hb.compile(data, { strict: true });
-            const result = template(data);
-            const html = result;
-            // We set the page content as the generated html by handlebars
-            await page.setContent(html, {
-                waitUntil: "networkidle0", // wait for page to load completely
-            });
-        } else {
-            await page.goto(file.url, {
-                waitUntil: "networkidle0", // wait for page to load completely
+
+    try {
+        for (const file of files) {
+            if (file.content) {
+                const inlineCss = require("inline-css");
+                const hb = require("handlebars");
+
+                const compiledData = await inlineCss(file.content, { url: "/" });
+                const template = hb.compile(compiledData, { strict: true });
+                const result = template(compiledData);
+
+                await page.setContent(result, {
+                    waitUntil: "networkidle0",
+                });
+            } else {
+                await page.goto(file.url, {
+                    waitUntil: "networkidle0",
+                });
+            }
+
+            const pdfBuffer = await page.pdf({ ...options, printBackground: true });
+            const savePath = path.join(saveDirectory, `${file.path}`); 
+            fs.writeFileSync(savePath, pdfBuffer);
+
+            pdfs.push({
+                ...file,
+                buffer: pdfBuffer,
+                savedPath: savePath, 
             });
         }
-        let pdfObj = JSON.parse(JSON.stringify(file));
-        delete pdfObj["content"];
-        pdfObj["buffer"] = Buffer.from(Object.values(await page.pdf(options)));
-        pdfs.push(pdfObj);
+    } catch (error) {
+        console.error("Error generating PDFs:", error);
+        throw new Error("Error generating PDFs");
+    } finally {
+        await browser.close(); 
     }
 
-    return Promise.resolve(pdfs)
-        .then(async function (data) {
-            await browser.close();
-            return data;
-        })
-        .asCallback(callback);
-}
+    return pdfs; 
+};
+
+
+
 
 module.exports.generatePdf = generatePdf;
 module.exports.generatePdfs = generatePdfs;

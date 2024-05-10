@@ -1,0 +1,9 @@
+# Development Files
+test/
+
+bin/
+
+# Example Files
+example/
+*.pdf
+
